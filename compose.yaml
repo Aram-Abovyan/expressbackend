@@ -2,6 +2,8 @@ services:
   server:
     image: app/server
     build: ./server
+    depends_on:
+      - db
     volumes:
       - ./server:/app
     ports:
