@@ -14,12 +14,18 @@ async function createLocation(req, res) {
 
 async function getLocations(req, res) {
   try {
-    const { per = 10, page = 1  } = req.query
+    const { per = 10, page = 1, category } = req.query
 
-    const locations = await Prisma.client().location.findMany({
+    const query = {
       skip: (Number(page) > 1 ? (Number(page) - 1 ) * Number(per) : 0),
       take: Number(per)
-    })
+    }
+
+    if (category) {
+      query.where = {category}
+    }
+
+    const locations = await Prisma.client().location.findMany(query)
     res.send({locations, message: 'success'})
   }
   catch (error) {
