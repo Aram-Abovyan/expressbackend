@@ -1,0 +1,27 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Location {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  category    Category @default(A)
+  rating      Float
+  reviewCount Int
+  latitude    String
+  longitude   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum Category {
+  A
+  B
+}

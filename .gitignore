@@ -1,0 +1,4 @@
+server/node_modules
+.swp
+db
+server/prisma/migrations
